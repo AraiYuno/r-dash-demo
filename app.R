@@ -1,8 +1,9 @@
 library(dash)
 library(dashBootstrapComponents)
-library(dashHtmlComponents)
 library(dashCoreComponents)
+library(dashBootstrapComponents)
 library(plotly)
+library(tidyverse)
 library(dplyr)
 
 qwl_df <- readr::read_csv("./data/bei_vita_qwl_assessment.csv")
@@ -108,4 +109,4 @@ app$callback(
 )
 
 
-app$run_server(debug = F)
+app$run_server(host = '0.0.0.0')
