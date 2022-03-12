@@ -56,7 +56,7 @@ app$layout(
                   htmlH6("Country of Residence"),
                   dccDropdown(
                     id="col-select",
-                    options = residence_list |> purrr::map(function(col) list(label = col, value = col)),
+                    options = residence_list %>% purrr::map(function(col) list(label = col, value = col)),
                     value = "HK & Macau"
                   ),
                   dccGraph(id="lineplot")
@@ -109,4 +109,4 @@ app$callback(
 )
 
 
-app$run_server(debug = F)
+app$run_server(host = '0.0.0.0')
