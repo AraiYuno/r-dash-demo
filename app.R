@@ -20,7 +20,7 @@ app$layout(
             list(
               dbcCol(
                 list(
-                  dash::htmlBr(),
+                  htmlBr(),
                   htmlH2("Bei Vita"),
                   htmlP(
                     dccMarkdown(
