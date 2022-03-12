@@ -1,10 +1,9 @@
 library(dash)
 library(dashBootstrapComponents)
-library(dashCoreComponents)
-library(dashBootstrapComponents)
-library(plotly)
-library(tidyverse)
+library(ggplot2)
 library(dplyr)
+library(plotly)
+library(purrr)
 
 qwl_df <- readr::read_csv("./data/bei_vita_qwl_assessment.csv")
 qwl_df$residence <- qwl_df$`Country of Residence`
@@ -17,69 +16,12 @@ app <- Dash$new(external_stylesheets = dbcThemes$BOOTSTRAP)
 app$layout(
     dbcContainer(
         list(
-          dbcRow(
-            list(
-              dbcCol(
-                list(
-                  htmlBr(),
-                  htmlH2("Bei Vita"),
-                  htmlP(
-                    dccMarkdown(
-                      "
-                            Visualization to represent how scores for quality of
-                            work life are distributed
-                            "
-                    )
-                  )
-                ),
-                width = 3
-              ),
-              dbcCol(
-                list(
-                  htmlH1("Quality of Work Life"),
-                  htmlH2("Client Name")
-                ),
-                width = 6
-              ),
-              dbcCol(
-                list(
-                ),
-                width = 3
-              )
-            ),
-            align = "center"
+          dccDropdown(
+            id="col-select",
+            options = residence_list %>% purrr::map(function(col) list(label = col, value = col)),
+            value = "HK & Macau"
           ),
-          dbcRow(
-            list(
-              dbcCol(
-                list(
-                  htmlH6("Country of Residence"),
-                  dccDropdown(
-                    id="col-select",
-                    options = residence_list %>% purrr::map(function(col) list(label = col, value = col)),
-                    value = "HK & Macau"
-                  ),
-                  dccGraph(id="lineplot")
-                  
-                ),
-                width = 12
-              )
-            ),
-            align = "center"
-          ),
-          dbcRow(
-            list(
-              dbcCol(
-                list(
-                )
-              ),
-              dbcCol(
-                list(
-                )
-              )
-            ),
-            align = "center"
-          )
+          dccGraph(id="lineplot")
         )
     )
 )
