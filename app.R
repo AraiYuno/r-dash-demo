@@ -3,7 +3,6 @@ library(dashBootstrapComponents)
 library(dashHtmlComponents)
 library(dashCoreComponents)
 library(plotly)
-library(tidyverse)
 library(dplyr)
 
 qwl_df <- readr::read_csv("./data/bei_vita_qwl_assessment.csv")
@@ -21,7 +20,7 @@ app$layout(
             list(
               dbcCol(
                 list(
-                  htmlBr(),
+                  dash::htmlBr(),
                   htmlH2("Bei Vita"),
                   htmlP(
                     dccMarkdown(
@@ -109,4 +108,4 @@ app$callback(
 )
 
 
-app$run_server(host = '0.0.0.0')
+app$run_server(debug = F)
